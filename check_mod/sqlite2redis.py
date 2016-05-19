@@ -25,14 +25,14 @@ def transDict(list,sqltype):
     for ip in list:
         tmpMlist = []
         if sqltype == "teatalk":
-            sql = "select modulename,CPname from module where ip ='%s'" %ip
+            sql = "select modulename,CPname,port from module where ip ='%s'" %ip
         elif sqltype == "public":
-             sql = "select publicname,cpname from public where ip ='%s'" %ip
+             sql = "select publicname,cpname,port from public where ip ='%s'" %ip
         else:
             print('sqltype error,exit.')
             exit(1)
         for n in db.queryAll(sql):
-            tmpMlist.append('%s:%s' %(str(n[0]),str(n[1])))
+            tmpMlist.append('%s:%s:%s' %(str(n[0]),str(n[1]),str(n[2])))
         Dict[ip] = tmpMlist
     return Dict
 
