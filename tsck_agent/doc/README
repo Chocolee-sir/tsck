@@ -1,0 +1,9 @@
+#Redis module info config must be exists.
+Useage:  python tsck_agent.py &
+
+#Must install python-redis.
+sudo easy_install python-redis
+or
+cd redis-2.8.0
+python setup.py buld
+python setup.py install

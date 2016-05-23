@@ -20,6 +20,15 @@ class RedisClass(object):
             exit(1)
 
 
+    def setExpireKey(self,key,value,expiretime):
+        try:
+            self.pool.set(key,value)
+            self.pool.expire(key,expiretime)
+        except:
+            print('Connect redis error,please check redis server is normal.')
+            exit(1)
+
+
     def getKey(self,key):
         try:
             return self.pool.get(key)
@@ -34,6 +43,19 @@ class RedisClass(object):
             for k,v in dictlist.items():
                 pipe.set(k,v)
             pipe.execute()
+        except:
+            print('Connect redis error,please check redis server is normal.')
+            exit(1)
+
+
+    def batchExpireSetKey(self,dictlist,expireTime):
+        try:
+            pipe = self.pool.pipeline()
+            for k,v in dictlist.items():
+                pipe.set(k,v)
+                pipe.expire(k,expireTime)
+            pipe.execute()
+
         except:
             print('Connect redis error,please check redis server is normal.')
             exit(1)

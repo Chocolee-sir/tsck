@@ -15,9 +15,9 @@ def confFile(conffile,key):
 
 #get config info.
 def getRedisConf():
-    redis_host = confFile('tsckagd.conf','redis_host')
-    redis_port = confFile('tsckagd.conf','redis_port')
-    redis_mon_frequency = confFile('tsckagd.conf','redis_mon_frequency')
+    redis_host = confFile('../conf/tsckagd.conf','redis_host')
+    redis_port = confFile('../conf/tsckagd.conf','redis_port')
+    redis_mon_frequency = confFile('../conf/tsckagd.conf','redis_mon_frequency')
     if redis_host is None:
         print("Tsckagd,conf 'redis_host' configuration error,please check it.")
         exit(1)

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 #encoding:utf-8
 author_ = 'Chocolee'
-from RedisClass import *
 from SqliteClass import *
+from tsck_agent.lib.RedisClass import *
+
 db = SqliteClass('tsck.db')
 
 
@@ -32,7 +33,7 @@ def transDict(list,sqltype):
             print('sqltype error,exit.')
             exit(1)
         for n in db.queryAll(sql):
-            tmpMlist.append('%s:%s:%s' %(str(n[0]),str(n[1]),str(n[2])))
+            tmpMlist.append('%s:%s:%s' %(str(n[0]),str(n[2]),str(n[1])))
         Dict[ip] = tmpMlist
     return Dict
 
@@ -40,7 +41,7 @@ def transDict(list,sqltype):
 if __name__ == '__main__':
     dictTeatalk = transDict(ipList('teatalk'),'teatalk')
     dictPublic = transDict(ipList('public'),'public')
-    R = RedisClass('10.10.212.134',6379)
+    R = RedisClass('10.10.206.96',6379)
     R.setKey('teatalkinfo',dictTeatalk)
     R.setKey('publicinfo',dictPublic)
  #   print eval(R.getKey('teatalkinfo'))['10.10.206.96']
