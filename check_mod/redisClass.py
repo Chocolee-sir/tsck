@@ -13,16 +13,28 @@ class RedisClass(object):
 
 
     def setKey(self,key,value):
-        self.pool.set(key,value)
+        try:
+            self.pool.set(key,value)
+        except:
+            print('Connect redis error,please check redis server is normal.')
+            exit(1)
 
 
     def getKey(self,key):
-        return self.pool.get(key)
+        try:
+            return self.pool.get(key)
+        except:
+            print('Connect redis error,please check redis server is normal.')
+            exit(1)
 
 
     def batchSetKey(self,dictlist):
-        pipe = self.pool.pipeline()
-        for k,v in dictlist.items():
-            pipe.set(k,v)
-        pipe.execute()
+        try:
+            pipe = self.pool.pipeline()
+            for k,v in dictlist.items():
+                pipe.set(k,v)
+            pipe.execute()
+        except:
+            print('Connect redis error,please check redis server is normal.')
+            exit(1)
 
